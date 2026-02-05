@@ -244,12 +244,18 @@
         </section>
 
         <section class="requirements">
-            <h3>Requirements</h3>
+            <h3>Installation (macOS)</h3>
+            <ul>
+                <li>Download the <code>.dmg</code> file and drag Collective to Applications</li>
+                <li><strong>Important:</strong> The app is not code-signed yet. Run this in Terminal:<br>
+                    <code style="display: inline-block; margin-top: 0.5rem; background: rgba(0,0,0,0.3); padding: 0.5rem 1rem; border-radius: 0.5rem;">xattr -cr /Applications/Collective.app</code>
+                </li>
+                <li>Open Collective from Applications</li>
+            </ul>
+            <h3 style="margin-top: 1.5rem;">Requirements</h3>
             <ul>
                 <li><strong>For AI features:</strong> Install <a href="https://ollama.ai" target="_blank" style="color: #667eea;">Ollama</a> with a model like llama3.2 or mistral</li>
                 <li><strong>macOS:</strong> macOS 11 (Big Sur) or later</li>
-                <li><strong>Windows:</strong> Windows 10/11 with WebView2</li>
-                <li><strong>Linux:</strong> Ubuntu 20.04+ or equivalent with WebKitGTK</li>
             </ul>
         </section>
 
