@@ -87,8 +87,3 @@ Download the latest release for macOS (Apple Silicon):
 | Networking | libp2p |
 | AI/Embeddings | fastembed |
 
----
-
-## License
-
-MIT
