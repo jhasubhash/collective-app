@@ -10,6 +10,10 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        html, body {
+            overflow-x: hidden;
+        }
+
         :root {
             --primary: #6366f1;
             --primary-dark: #4f46e5;
@@ -261,6 +265,12 @@
             opacity: 0.1;
         }
 
+        @media (max-width: 768px) {
+            .showcase-image::before {
+                display: none;
+            }
+        }
+
         /* Features Grid */
         .features {
             background: var(--bg-secondary);
@@ -392,6 +402,8 @@
             display: block;
             color: var(--accent);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            word-break: break-all;
+            overflow-wrap: break-word;
         }
 
         .install-requirements h3 {
@@ -438,8 +450,21 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 4rem;
+            gap: 2rem;
             flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .tech-stack .container {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .tech-icons {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
         }
 
         .tech-label {
