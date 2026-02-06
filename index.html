@@ -6,612 +6,718 @@
     <title>Collective - AI-Powered Collaborative Knowledge</title>
     <meta name="description" content="Share documents, chat with AI, collaborate peer-to-peer - all offline-first. Free desktop app for macOS.">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --pixel-green: #00ff41;
-            --pixel-cyan: #00d4ff;
-            --pixel-magenta: #ff00ff;
-            --pixel-yellow: #ffff00;
-            --pixel-orange: #ff9500;
-            --dark-bg: #0a0a0f;
-            --darker-bg: #050508;
-            --card-bg: #12121a;
-            --border-color: #2a2a3a;
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
+            --accent: #06b6d4;
+            --bg: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-dark: #0f172a;
+            --text: #1e293b;
+            --text-secondary: #64748b;
+            --text-light: #94a3b8;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
         }
 
         body {
-            font-family: 'VT323', monospace;
-            background: var(--dark-bg);
-            min-height: 100vh;
-            color: #fff;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Scanline effect */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0.15),
-                rgba(0, 0, 0, 0.15) 1px,
-                transparent 1px,
-                transparent 2px
-            );
-            z-index: 1000;
-        }
-
-        /* Grid background */
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            background-image:
-                linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: -1;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #1e293b 100%);
+            color: white;
+            padding: 6rem 0 8rem;
             position: relative;
+            overflow: hidden;
         }
 
-        header {
-            text-align: center;
-            padding: 4rem 0 2rem;
-        }
-
-        .logo {
-            font-size: 5rem;
-            margin-bottom: 1rem;
-            animation: float 3s ease-in-out infinite;
-            text-shadow: 0 0 20px var(--pixel-cyan);
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        h1 {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 2.5rem;
-            color: var(--pixel-green);
-            text-shadow:
-                3px 3px 0 var(--pixel-cyan),
-                -1px -1px 0 var(--pixel-magenta);
-            margin-bottom: 1.5rem;
-            letter-spacing: 2px;
-        }
-
-        .tagline {
-            font-size: 1.8rem;
-            color: var(--pixel-cyan);
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 10px var(--pixel-cyan);
-        }
-
-        .subtitle {
-            color: #888;
-            font-size: 1.4rem;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* Pixel border box */
-        .pixel-box {
-            background: var(--card-bg);
-            border: 4px solid var(--pixel-green);
-            box-shadow:
-                8px 8px 0 var(--darker-bg),
-                0 0 20px rgba(0, 255, 65, 0.2);
-            position: relative;
-        }
-
-        .pixel-box::before {
+        .hero::before {
             content: "";
             position: absolute;
-            top: -4px;
-            left: -4px;
-            right: -4px;
-            bottom: -4px;
-            border: 2px solid var(--pixel-cyan);
-            pointer-events: none;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236366f1' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             opacity: 0.5;
         }
 
-        .download-section {
-            padding: 2.5rem;
+        .hero-content {
+            position: relative;
+            z-index: 1;
             text-align: center;
-            margin: 3rem 0;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .download-section h2 {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 1.2rem;
-            color: var(--pixel-yellow);
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 0 var(--pixel-orange);
-        }
-
-        .download-section > p {
-            color: #aaa;
+        .hero-badge {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--primary-light);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 500;
             margin-bottom: 1.5rem;
-            font-size: 1.3rem;
+            border: 1px solid rgba(99, 102, 241, 0.3);
         }
 
-        .download-buttons {
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
             display: flex;
+            gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 1rem;
         }
 
-        .download-btn {
+        .btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.75rem;
-            background: var(--pixel-green);
-            color: #000;
-            padding: 1rem 2rem;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
             text-decoration: none;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.7rem;
-            border: 4px solid #fff;
-            box-shadow: 4px 4px 0 #000;
-            transition: all 0.1s;
-            text-transform: uppercase;
+            transition: all 0.2s;
         }
 
-        .download-btn:hover {
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0 #000;
-            background: var(--pixel-cyan);
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.4);
         }
 
-        .download-btn:active {
-            transform: translate(4px, 4px);
-            box-shadow: none;
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px 0 rgba(99, 102, 241, 0.5);
         }
 
-        .download-btn svg { width: 24px; height: 24px; }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
 
-        .version-info {
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .hero-version {
             margin-top: 1.5rem;
-            color: #666;
-            font-size: 1.2rem;
+            color: var(--text-light);
+            font-size: 0.875rem;
         }
-        .version-info a {
-            color: var(--pixel-cyan);
+
+        .hero-version a {
+            color: var(--primary-light);
             text-decoration: none;
         }
-        .version-info a:hover {
+
+        .hero-version a:hover {
             text-decoration: underline;
-            text-shadow: 0 0 10px var(--pixel-cyan);
         }
 
-        /* Screenshots Section */
-        .screenshots {
-            margin: 4rem 0;
+        /* Feature Showcase */
+        .showcase {
+            padding: 6rem 0;
         }
 
-        .screenshots h2 {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 1.2rem;
-            color: var(--pixel-magenta);
-            text-align: center;
-            margin-bottom: 3rem;
-            text-shadow: 2px 2px 0 var(--pixel-cyan);
-        }
-
-        .screenshot-item {
+        .showcase-item {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            gap: 4rem;
             align-items: center;
-            margin-bottom: 4rem;
-            padding: 2rem;
+            margin-bottom: 6rem;
         }
 
-        .screenshot-item:nth-child(odd) {
+        .showcase-item:nth-child(even) {
             direction: rtl;
         }
 
-        .screenshot-item > * {
+        .showcase-item:nth-child(even) > * {
             direction: ltr;
         }
 
-        .screenshot-img {
-            border: 4px solid var(--pixel-cyan);
-            box-shadow: 8px 8px 0 var(--darker-bg);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all 0.3s;
+        .showcase-item:last-child {
+            margin-bottom: 0;
         }
 
-        .screenshot-img:hover {
-            transform: scale(1.02);
-            box-shadow: 12px 12px 0 var(--darker-bg), 0 0 30px rgba(0, 212, 255, 0.3);
+        .showcase-content {
+            max-width: 480px;
         }
 
-        .screenshot-img img {
-            width: 100%;
-            height: auto;
-            display: block;
+        .showcase-label {
+            display: inline-block;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
         }
 
-        .screenshot-info h3 {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.9rem;
-            color: var(--pixel-green);
+        .showcase-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
             margin-bottom: 1rem;
-            line-height: 1.8;
+            color: var(--text);
+            letter-spacing: -0.02em;
         }
 
-        .screenshot-info p {
-            font-size: 1.4rem;
-            color: #aaa;
-            line-height: 1.8;
+        .showcase-content p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            line-height: 1.7;
         }
 
-        .screenshot-info .highlight {
-            color: var(--pixel-yellow);
-            text-shadow: 0 0 5px var(--pixel-yellow);
-        }
-
-        /* Features */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin: 4rem 0;
-        }
-
-        .feature {
-            background: var(--card-bg);
-            border: 3px solid var(--border-color);
-            padding: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .feature:hover {
-            border-color: var(--pixel-green);
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
-            transform: translateY(-5px);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .feature h3 {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.65rem;
-            margin-bottom: 1rem;
-            color: var(--pixel-cyan);
-            line-height: 1.6;
-        }
-
-        .feature p {
-            color: #888;
-            font-size: 1.2rem;
-        }
-
-        /* Requirements */
-        .requirements {
-            background: var(--card-bg);
-            border: 3px solid var(--pixel-orange);
-            padding: 2rem;
-            margin: 3rem 0;
-        }
-
-        .requirements h3 {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--pixel-orange);
-        }
-
-        .requirements ul {
-            list-style: none;
-            color: #aaa;
-            font-size: 1.3rem;
-        }
-
-        .requirements li {
-            padding: 0.75rem 0;
-            padding-left: 2rem;
+        .showcase-image {
             position: relative;
         }
 
-        .requirements li::before {
-            content: ">";
+        .showcase-image img {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border);
+        }
+
+        .showcase-image::before {
+            content: "";
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: 20px;
+            bottom: 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 16px;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        /* Features Grid */
+        .features {
+            background: var(--bg-secondary);
+            padding: 6rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+            border-color: var(--primary-light);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+
+        /* Installation */
+        .installation {
+            padding: 6rem 0;
+        }
+
+        .install-card {
+            background: var(--bg-dark);
+            color: white;
+            border-radius: 24px;
+            padding: 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .install-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .install-steps {
+            list-style: none;
+        }
+
+        .install-steps li {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            width: 28px;
+            height: 28px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            color: var(--text-light);
+        }
+
+        .step-content strong {
+            color: white;
+        }
+
+        .install-code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: block;
+            color: var(--accent);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .install-requirements h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .install-requirements ul {
+            list-style: none;
+        }
+
+        .install-requirements li {
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .install-requirements li::before {
+            content: "→";
             position: absolute;
             left: 0;
-            color: var(--pixel-green);
-            font-weight: bold;
+            color: var(--primary-light);
         }
 
-        .requirements code {
-            background: #1a1a2e;
-            padding: 0.5rem 1rem;
-            border: 2px solid var(--pixel-green);
-            display: inline-block;
-            margin-top: 0.5rem;
-            font-family: 'VT323', monospace;
-            font-size: 1.2rem;
-            color: var(--pixel-green);
-        }
-
-        .requirements a {
-            color: var(--pixel-cyan);
+        .install-requirements a {
+            color: var(--accent);
             text-decoration: none;
         }
 
-        .requirements a:hover {
-            text-shadow: 0 0 10px var(--pixel-cyan);
+        .install-requirements a:hover {
+            text-decoration: underline;
         }
 
         /* Tech Stack */
         .tech-stack {
-            text-align: center;
-            margin: 4rem 0;
-            padding: 2rem;
+            padding: 4rem 0;
+            border-top: 1px solid var(--border);
         }
 
-        .tech-stack h3 {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.7rem;
-            color: #555;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 2rem;
+        .tech-stack .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .tech-label {
+            color: var(--text-light);
+            font-size: 0.875rem;
+            font-weight: 500;
         }
 
         .tech-icons {
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 3rem;
+            gap: 2.5rem;
+            align-items: center;
         }
 
         .tech-item {
             display: flex;
-            flex-direction: column;
             align-items: center;
             gap: 0.5rem;
-            color: #666;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-        }
-
-        .tech-item:hover {
-            color: var(--pixel-green);
-            transform: scale(1.1);
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
         }
 
         .tech-item span {
-            font-size: 2.5rem;
+            font-size: 1.5rem;
         }
 
         /* Footer */
         footer {
+            background: var(--bg-secondary);
+            padding: 3rem 0;
             text-align: center;
-            padding: 3rem 2rem;
-            border-top: 2px solid var(--border-color);
-            margin-top: 4rem;
+            border-top: 1px solid var(--border);
         }
 
         footer p {
-            color: #555;
-            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
         }
 
         footer a {
-            color: var(--pixel-cyan);
+            color: var(--primary);
             text-decoration: none;
-            margin: 0 0.5rem;
+            font-weight: 500;
         }
 
         footer a:hover {
-            text-shadow: 0 0 10px var(--pixel-cyan);
-        }
-
-        /* Blinking cursor */
-        .cursor {
-            display: inline-block;
-            width: 10px;
-            height: 1.2em;
-            background: var(--pixel-green);
-            animation: blink 1s infinite;
-            vertical-align: middle;
-            margin-left: 5px;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
+            text-decoration: underline;
         }
 
         /* Responsive */
-        @media (max-width: 900px) {
-            .screenshot-item {
+        @media (max-width: 1024px) {
+            .showcase-item {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
+                gap: 2rem;
             }
 
-            .screenshot-item:nth-child(odd) {
+            .showcase-item:nth-child(even) {
                 direction: ltr;
+            }
+
+            .showcase-content {
+                max-width: 100%;
+                text-align: center;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .install-card {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
         }
 
         @media (max-width: 768px) {
-            h1 { font-size: 1.5rem; }
-            .tagline { font-size: 1.4rem; }
-            header { padding: 2rem 0 1rem; }
-            .download-section { padding: 1.5rem; }
-            .download-btn {
-                padding: 0.75rem 1.5rem;
-                font-size: 0.6rem;
+            .hero {
+                padding: 4rem 0 5rem;
             }
-            .screenshot-info h3 { font-size: 0.7rem; }
-            .feature h3 { font-size: 0.55rem; }
+
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+
+            .hero p {
+                font-size: 1.125rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header h2 {
+                font-size: 1.75rem;
+            }
+
+            .showcase-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .install-card {
+                padding: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo">📚</div>
-            <h1>COLLECTIVE<span class="cursor"></span></h1>
-            <p class="tagline">[ AI-Powered Knowledge Base ]</p>
-            <p class="subtitle">Share docs // Chat with AI // P2P sync // No cloud required</p>
-        </header>
-
-        <section class="download-section pixel-box">
-            <h2>> DOWNLOAD NOW</h2>
-            <p>Available for macOS (Apple Silicon) - More platforms coming soon</p>
-
-            <div class="download-buttons">
-                <a href="https://github.com/jhasubhash/collective-app/releases/download/v0.0.2/Collective_0.0.2_aarch64.dmg" class="download-btn">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-                    macOS (Apple Silicon)
-                </a>
-            </div>
-
-            <p class="version-info">
-                v0.0.2 // <a href="https://github.com/jhasubhash/collective-app/releases">View all releases</a>
-            </p>
-        </section>
-
-        <section class="screenshots">
-            <h2>> GAMEPLAY PREVIEW</h2>
-
-            <div class="screenshot-item">
-                <div class="screenshot-img">
-                    <img src="images/Collaborate seameless on a shared space.png" alt="Collaborate on shared spaces">
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-badge">Now available for macOS</span>
+                <h1>Your knowledge base,<br><span>powered by AI</span></h1>
+                <p>Create shared spaces, collaborate with your team, and let AI answer questions about your documents. All offline-first and peer-to-peer.</p>
+                <div class="hero-buttons">
+                    <a href="https://github.com/jhasubhash/collective-app/releases/download/v0.0.2/Collective_0.0.2_aarch64.dmg" class="btn btn-primary">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                        Download for macOS
+                    </a>
+                    <a href="https://github.com/jhasubhash/collective-app/releases" class="btn btn-secondary">
+                        View all releases
+                    </a>
                 </div>
-                <div class="screenshot-info">
-                    <h3>// TEAM COLLABORATION</h3>
-                    <p>Create <span class="highlight">shared spaces</span> for your team. Organize documents in folders, write in markdown, and let the <span class="highlight">AI answer questions</span> about your content. Ask "When was the farewell party?" and get instant answers with source citations.</p>
+                <p class="hero-version">Version 0.0.2 · Apple Silicon · <a href="#installation">Installation guide</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Showcase -->
+    <section class="showcase">
+        <div class="container">
+            <div class="showcase-item">
+                <div class="showcase-content">
+                    <span class="showcase-label">AI Chat</span>
+                    <h2>Ask questions, get instant answers</h2>
+                    <p>Chat with your documents using AI. Ask "Who attended the farewell party?" and get accurate answers with source citations. The AI understands context and finds relevant information across all your indexed documents.</p>
+                </div>
+                <div class="showcase-image">
+                    <img src="images/Collaborate seameless on a shared space.png" alt="AI Chat answering questions about documents">
                 </div>
             </div>
 
-            <div class="screenshot-item">
-                <div class="screenshot-img">
-                    <img src="images/Connects your local llm as well as cloud.png" alt="LLM Configuration">
+            <div class="showcase-item">
+                <div class="showcase-content">
+                    <span class="showcase-label">Flexible AI</span>
+                    <h2>Bring your own LLM</h2>
+                    <p>Connect to local models like Ollama or LM Studio for complete privacy. Or use cloud providers like OpenAI, Claude, and Gemini. Test your connection and switch providers anytime.</p>
                 </div>
-                <div class="screenshot-info">
-                    <h3>// BRING YOUR OWN AI</h3>
-                    <p>Connect to <span class="highlight">local LLMs</span> like Ollama or LM Studio for full privacy. Or use cloud providers like <span class="highlight">OpenAI, Claude, or Gemini</span>. Your choice, your data, your rules.</p>
-                </div>
-            </div>
-
-            <div class="screenshot-item">
-                <div class="screenshot-img">
-                    <img src="images/p2p connection for sharing.png" alt="P2P Connection">
-                </div>
-                <div class="screenshot-info">
-                    <h3>// PEER-TO-PEER NETWORK</h3>
-                    <p>No central server. Connect <span class="highlight">directly with teammates</span> on your local network. See who's online, share your Peer ID, and sync documents in real-time. <span class="highlight">Your data never leaves your network.</span></p>
+                <div class="showcase-image">
+                    <img src="images/Connects your local llm as well as cloud.png" alt="LLM configuration settings">
                 </div>
             </div>
 
-            <div class="screenshot-item">
-                <div class="screenshot-img">
-                    <img src="images/Spaces can be shared.png" alt="AI Chat with Code">
+            <div class="showcase-item">
+                <div class="showcase-content">
+                    <span class="showcase-label">P2P Network</span>
+                    <h2>Direct peer-to-peer sync</h2>
+                    <p>No central server needed. Connect directly with teammates on your local network using peer IDs. See who's online, share documents in real-time, and keep your data within your network.</p>
                 </div>
-                <div class="screenshot-info">
-                    <h3>// AI THAT READS CODE</h3>
-                    <p>Store scripts, configs, and technical docs. Ask the AI to <span class="highlight">explain your backup scripts</span> or find that CLI command you forgot. Get <span class="highlight">syntax-highlighted code blocks</span> in responses with full context.</p>
+                <div class="showcase-image">
+                    <img src="images/p2p connection for sharing.png" alt="P2P network connection panel">
                 </div>
             </div>
-        </section>
 
-        <section class="features">
-            <div class="feature">
-                <div class="feature-icon">🤖</div>
-                <h3>AI-POWERED CHAT</h3>
-                <p>RAG-powered search finds relevant docs automatically. Ask questions, get answers with citations.</p>
+            <div class="showcase-item">
+                <div class="showcase-content">
+                    <span class="showcase-label">Technical Docs</span>
+                    <h2>AI that understands code</h2>
+                    <p>Store scripts, configs, and technical documentation. Ask the AI to explain your backup scripts or find that CLI command you forgot. Get syntax-highlighted responses with full context.</p>
+                </div>
+                <div class="showcase-image">
+                    <img src="images/Spaces can be shared.png" alt="AI explaining code and scripts">
+                </div>
             </div>
-            <div class="feature">
-                <div class="feature-icon">🔗</div>
-                <h3>P2P SYNC</h3>
-                <p>Direct peer connections via libp2p. Share spaces with invite codes. No server needed.</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">📴</div>
-                <h3>OFFLINE-FIRST</h3>
-                <p>Works without internet. All data stored locally in SQLite. Sync when you reconnect.</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🔒</div>
-                <h3>PRIVACY MODE</h3>
-                <p>Your data stays on your devices. Use local LLMs for zero cloud dependency.</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">📝</div>
-                <h3>MARKDOWN DOCS</h3>
-                <p>Rich editor with live preview. Organize in spaces and folders. Index for AI search.</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🔍</div>
-                <h3>SMART SEARCH</h3>
-                <p>Semantic vector search finds meaning, not just keywords. Powered by local embeddings.</p>
-            </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="requirements">
-            <h3>> INSTALLATION</h3>
-            <ul>
-                <li>Download the .dmg and drag Collective to Applications</li>
-                <li><strong>IMPORTANT:</strong> App is not code-signed yet. Run in Terminal:
-                    <code>xattr -cr /Applications/Collective.app</code>
-                </li>
-                <li>Launch Collective from Applications</li>
-            </ul>
-            <h3 style="margin-top: 2rem;">> REQUIREMENTS</h3>
-            <ul>
-                <li><strong>AI Features:</strong> Install <a href="https://ollama.ai" target="_blank">Ollama</a> with llama3.2 or mistral</li>
-                <li><strong>System:</strong> macOS 11 (Big Sur) or later</li>
-            </ul>
-        </section>
+    <!-- Features Grid -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Everything you need</h2>
+                <p>Built for teams who value privacy and want AI-powered productivity without the cloud dependency.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>RAG-Powered Search</h3>
+                    <p>Semantic search finds relevant documents automatically. Get answers with source citations.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3>Invite Codes</h3>
+                    <p>Share spaces with simple invite codes. No account needed, just share and collaborate.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📴</div>
+                    <h3>Offline-First</h3>
+                    <p>Works without internet. All data stored locally. Sync automatically when reconnected.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Privacy-Focused</h3>
+                    <p>Your data stays on your devices. Use local LLMs for zero cloud dependency.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>Markdown Editor</h3>
+                    <p>Rich editor with live preview. Organize in spaces and folders. Full formatting support.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Fast & Native</h3>
+                    <p>Built with Tauri and Rust. Lightweight, fast, and uses minimal system resources.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <section class="tech-stack">
-            <h3>// BUILT WITH</h3>
+    <!-- Installation -->
+    <section class="installation" id="installation">
+        <div class="container">
+            <div class="install-card">
+                <div class="install-content">
+                    <h2>Get started in minutes</h2>
+                    <ol class="install-steps">
+                        <li>
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <strong>Download the DMG</strong><br>
+                                Click the download button above and open the file
+                            </div>
+                        </li>
+                        <li>
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <strong>Drag to Applications</strong><br>
+                                Move Collective.app to your Applications folder
+                            </div>
+                        </li>
+                        <li>
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <strong>Allow the app to run</strong><br>
+                                The app isn't code-signed yet. Run this in Terminal:
+                                <code class="install-code">xattr -cr /Applications/Collective.app</code>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="step-number">4</span>
+                            <div class="step-content">
+                                <strong>Launch and enjoy!</strong><br>
+                                Open Collective from Applications
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+                <div class="install-requirements">
+                    <h3>Requirements</h3>
+                    <ul>
+                        <li>macOS 11 (Big Sur) or later</li>
+                        <li>Apple Silicon (M1/M2/M3)</li>
+                        <li>For AI features: <a href="https://ollama.ai" target="_blank">Ollama</a> with llama3.2 or any compatible model</li>
+                    </ul>
+                    <h3 style="margin-top: 2rem;">Coming Soon</h3>
+                    <ul>
+                        <li>macOS Intel support</li>
+                        <li>Windows</li>
+                        <li>Linux</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="tech-stack">
+        <div class="container">
+            <span class="tech-label">Built with</span>
             <div class="tech-icons">
-                <div class="tech-item"><span>🦀</span>Rust</div>
-                <div class="tech-item"><span>⚛️</span>React</div>
-                <div class="tech-item"><span>🪟</span>Tauri</div>
-                <div class="tech-item"><span>🗄️</span>SQLite</div>
-                <div class="tech-item"><span>🌐</span>libp2p</div>
+                <div class="tech-item"><span>🦀</span> Rust</div>
+                <div class="tech-item"><span>⚛️</span> React</div>
+                <div class="tech-item"><span>🪟</span> Tauri</div>
+                <div class="tech-item"><span>🗄️</span> SQLite</div>
+                <div class="tech-item"><span>🌐</span> libp2p</div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <footer>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
             <p>
-                <a href="https://github.com/jhasubhash/collective-app/releases">Releases</a> //
-                <a href="https://github.com/jhasubhash/collective-app/issues">Report Bug</a>
+                <a href="https://github.com/jhasubhash/collective-app/releases">Releases</a> ·
+                <a href="https://github.com/jhasubhash/collective-app/issues">Report an issue</a>
             </p>
-        </footer>
-    </div>
+        </div>
+    </footer>
 </body>
 </html>
