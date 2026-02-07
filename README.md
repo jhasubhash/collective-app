@@ -55,7 +55,7 @@ Switch to dark mode for a comfortable viewing experience. Reduce eye strain duri
 
 Download the latest release for macOS (Apple Silicon):
 
-[**Download v0.0.8**](https://github.com/jhasubhash/collective-app/releases/latest)
+[**Download v0.0.9**](https://github.com/jhasubhash/collective-app/releases/latest)
 
 ### Installation
 
